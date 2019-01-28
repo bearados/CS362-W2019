@@ -653,7 +653,7 @@ int getCost(int cardNumber)
 
 void adventurerF(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int temphand[]){
       int z = 0;
-      while(drawntreasure<2){
+      while(drawntreasure<3){ //bug added should be drawn treasure < 2
         if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
           shuffle(currentPlayer, state);
         }
@@ -677,7 +677,7 @@ void adventurerF(int drawntreasure, struct gameState *state, int currentPlayer, 
 
 void smithyF(int currentPlayer, struct gameState *state, int handPos) {
 	int i = 0;
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 2; i++)//added bug: i should be < 3 not 2
 	{
 		drawCard(currentPlayer, state);
 	}
@@ -709,7 +709,7 @@ int mineF(int currentPlayer, struct gameState *state, int handPos, int choice1, 
 		return -1;
 	}
 
-	if (choice2 > treasure_map || choice2 < curse)
+	if (choice2 >= treasure_map || choice2 < curse)//added bug: shoud be choice2 > treasure map ...
 	{
 		return -1;
 	}
@@ -737,7 +737,7 @@ int mineF(int currentPlayer, struct gameState *state, int handPos, int choice1, 
 }
 
 int gardensF() {
-	return -1;
+	return 1;//added bug, should return -1
 }
 
 
