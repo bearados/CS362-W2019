@@ -43,5 +43,8 @@ score = 30
 TEST FAILED: 'scoreFor(0, state) == 33' on line 32.
 File 'dominion.c'
 Lines executed:22.12% of 565
+Branches executed:28.78% of 417
+Taken at least once:25.66% of 417
+Calls executed:10.53% of 95
 Creating 'dominion.c.gcov'
 

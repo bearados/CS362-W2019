@@ -30,8 +30,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o
 	./unittest3 >> unittestresults.out
 	gcc -o unittest4 dominion.c rngs.c unittest4.c $(CFLAGS)
 	./unittest4 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
+	gcov -b dominion.c >> unittestresults.out
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
