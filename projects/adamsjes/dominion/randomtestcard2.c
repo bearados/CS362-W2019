@@ -1,6 +1,6 @@
 //author: Jessica Adams
 //date:2/27/2019
-//randomtestcard1.c: random test of council room card
+//randomtestcard2.c: random test of smithy card
 
 #include "dominion.h"
 #include "dominion_helpers.h"
@@ -18,44 +18,35 @@ int main() {
 	struct gameState* state = newGame();
 	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 		sea_hag, tribute, smithy};
-	int i = 0, j = 0, numPlayers = 0, err = 0, r = 0, numCards;
+	int i = 0, j = 0, numCards;
 	//test gernerator
-	for(j = 0; j < 5; j++){
+	for(j = 0; j < 30; j++){
 		//create new game
 		struct gameState* state = newGame();
 		int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	                sea_hag, tribute, smithy};
 		
-		numPlayers = 2 + (rand() % 3); //2-4 players
 		numCards = 10 + (rand() % 21); //number of cards in deck, at least 10 less than 30
-		initializeGame(numPlayers, k, 6, state);
-		for(i = 0; i < numPlayers; i++){
-			state->deckCount[i] = numCards;
-			state->handCount[i] = 0;
-			state->discardCount[i] = 0;
+		initializeGame(2, k, 6, state);
+		state->deckCount[0] = numCards;
+		state->handCount[0] = 1;
+		state->discardCount[0] = 0;
+		
+		for(i = 0; i < numCards; i++){
+			state->deck[0][i] = 1 + (rand() % 27);
 		}
-		for(r = 0; r < numPlayers; r++){
-			for(i = 0; i < numCards; i++){
-				state->deck[r][i] = 1 + (rand() % 27);
-			}
-		}
-		//initialize hand for player holding council room card (player 0)
-		state->hand[0][0] = 8;
-		state->handCount[0]++;
-		//call council room in card effect funtion
-		err = cardEffect(8, 0, 0, 0, state, 0, 0);
+		
+		//initialize hand for player holding smithy card (player 13)
+		state->hand[0][0] = 13;
+		//call smithy
+		smithyF(0, state, 0); //player #, state, handpos
 		//assert statements
 		printf("Results of test %d:\n", j+1);
-		for (i = 1; i < numPlayers; i++){
-			asserttrue(state->handCount[i] == 1);
-			asserttrue(state->deckCount[i] == (numCards - 1));
-		}
-		asserttrue(state->handCount[0] == 4);
-		asserttrue(state->deckCount[0] == (numCards - 4));
-		asserttrue(state->numBuys == 2);
+		asserttrue(state->handCount[0] == 3);
 		free(state);
 	}
 	return 0;
 	
 }
+
 
