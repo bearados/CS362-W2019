@@ -39,7 +39,7 @@ int main() {
 		//initialize hand for player holding smithy card (player 13)
 		state->hand[0][0] = 13;
 		//call smithy
-		smithyF(0, state, 0); //player #, state, handpos
+		smithy_card(0, state, 0); //player #, state, handpos
 		//assert statements
 		printf("Results of test %d:\n", j+1);
 		asserttrue(state->handCount[0] == 3);
