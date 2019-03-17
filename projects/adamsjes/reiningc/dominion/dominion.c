@@ -1262,7 +1262,7 @@ int adventurer_card(int temphand[], struct gameState *state, int currentPlayer)
 	int cardDrawn;
 	int z = 0; // This is the counter for the temp hand
 
-	while (drawntreasure <= 2) { // *** BUG INTRODUCED *** should be while(drawntreasure<2)
+	while (drawntreasure < 2) { //fixed bug
 		if (state->deckCount[currentPlayer] < 1) {//if the deck is empty we need to shuffle discard and add to deck
 			shuffle(currentPlayer, state);
 		}
@@ -1277,7 +1277,7 @@ int adventurer_card(int temphand[], struct gameState *state, int currentPlayer)
 			z++;
 		}
 	}
-	while (z >= 0) { // *** BUG INTRODUCED *** should be (z-1>=0)
+	while (z-1 >= 0) { //fixed bug
 		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1]; // discard all cards in play that have been drawn
 		z = z - 1;
 	}
@@ -1288,7 +1288,7 @@ int smithy_card(int handPos, struct gameState *state, int currentPlayer)
 {
 	int i;
 	//+3 Cards
-	for (i = 0; i <= 3; i++) // *** BUG INTRODUCED *** should be: for (i=0; i<3; i++)
+	for (i = 0; i < 3; i++) // fixed bug
 	{
 		drawCard(currentPlayer, state);
 	}
@@ -1319,7 +1319,7 @@ int steward_card(int choice1, int choice2, int choice3, int handPos, struct game
 		drawCard(currentPlayer, state);
 		drawCard(currentPlayer, state);
 	}
-	else if (choice2 == 2) // *** BUG INTRODUCED *** should be: else if (choice1 == 2)
+	else if (choice1 == 2) //fixed bug
 	{
 		//+2 coins
 		state->coins = state->coins + 2;
@@ -1341,7 +1341,7 @@ int remodel_card(int choice1, int choice2, int handPos, struct gameState *state,
 	int i;
 	int j = state->hand[currentPlayer][choice1];  //store card we will trash
 
-	if ((getCost(state->hand[currentPlayer][choice1]) + 2) < getCost(choice2)) // *** BUG INTRODUCED *** should be: if ((getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2))
+	if ((getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2)) //fixed error
 	{
 		return -1;
 	}

@@ -15,11 +15,12 @@
 
 int main() {
 	printf("beginning random test of adventure function...\n");
-	int i = 0, j = 0, num = 0, drawnTreasure = 0, numCards = 30, numTCards = 0, Discard = 1;
+	int i = 0, j = 0, num = 0, drawnTreasure = 0, numCards = 30, numTCards = 0, Discard = 1, dc = 0;
 	int temphand[500];
 	srand((unsigned)time(0));
 	for(j = 0; j < 10; j++){
 		//start new game
+		Discard = 1;
 		struct gameState* state = newGame();
         	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
                 sea_hag, tribute, smithy};
